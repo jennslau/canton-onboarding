@@ -58,3 +58,6 @@ import { RouterView } from 'vue-router';
 
 .slide-up-leave-to {
   opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
