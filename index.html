@@ -5,6 +5,45 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Canton Onboarding System</title>
+    <style>
+      /* Force the gradients to work */
+      .gradient-bg {
+        background: linear-gradient(135deg, #f9fafb 0%, #dbeafe 100%) !important;
+        min-height: 100vh;
+      }
+      
+      .gradient-header {
+        background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1d4ed8 100%) !important;
+        border-radius: 1rem;
+        padding: 2rem;
+        color: white;
+        margin-bottom: 2rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+      
+      .progress-container {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        backdrop-filter: blur(10px);
+      }
+      
+      .progress-bar {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 9999px;
+        height: 0.75rem;
+        width: 100%;
+      }
+      
+      .progress-fill {
+        background: white;
+        border-radius: 9999px;
+        height: 0.75rem;
+        width: 32%;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s ease;
+      }
+    </style>
   </head>
   <body>
     <div id="app"></div>
