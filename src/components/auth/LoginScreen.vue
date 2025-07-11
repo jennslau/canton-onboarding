@@ -1,28 +1,34 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800 flex items-center justify-center">
+  <!-- GRADIENT BACKGROUND - Exact match to React artifact -->
+  <div class="min-h-screen flex items-center justify-center" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1d4ed8 100%);">
     <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+      
+      <!-- Logo and Header -->
       <div class="text-center mb-8">
-        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+        <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);">
           <span class="text-white font-bold text-2xl">C</span>
         </div>
         <h1 class="text-3xl font-bold text-gray-900">Canton</h1>
         <p class="text-gray-600">AI-Powered Onboarding by Bitwave</p>
-        <p class="text-sm text-gray-500 mt-2">Interactive Demo - {{ ACTUAL_TASK_COUNT }} Task Management System</p>
+        <p class="text-sm text-gray-500 mt-2">Interactive Demo - 166 Task Management System</p>
       </div>
       
+      <!-- Demo Users Section -->
       <div class="space-y-4">
         <div>
           <h3 class="font-semibold text-gray-900 mb-2">Demo as Customer:</h3>
+          
           <button 
-            @click="handleLogin('finance@validator1.com')"
-            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+            @click="loginAsUser('finance@validator1.com')"
+            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mb-2"
           >
             <div class="font-medium">Sarah Johnson</div>
             <div class="text-sm text-gray-500">Validator One LLC - Tier 2</div>
           </button>
+          
           <button 
-            @click="handleLogin('accounting@validator2.io')"
-            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mt-2"
+            @click="loginAsUser('accounting@validator2.io')"
+            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
           >
             <div class="font-medium">Mike Chen</div>
             <div class="text-sm text-gray-500">Crypto Validator Corp - Tier 2</div>
@@ -31,46 +37,96 @@
         
         <div>
           <h3 class="font-semibold text-gray-900 mb-2">Demo as Internal Team:</h3>
+          
           <button 
-            @click="handleLogin('cso@bitwave.io')"
-            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
+            @click="loginAsUser('cso@bitwave.io')"
+            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mb-2"
           >
             <div class="font-medium">Alex Rivera</div>
             <div class="text-sm text-gray-500">Customer Success Officer</div>
           </button>
+          
           <button 
-            @click="handleLogin('cs.manager@bitwave.io')"
-            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors mt-2"
+            @click="loginAsUser('cs.manager@bitwave.io')"
+            class="w-full text-left p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
           >
             <div class="font-medium">Jessica Kim</div>
             <div class="text-sm text-gray-500">CS Program Manager</div>
           </button>
         </div>
       </div>
+
+      <!-- System Status -->
+      <div class="mt-6 text-center">
+        <div class="inline-flex items-center px-4 py-2 bg-gray-50 rounded-full border border-gray-200">
+          <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+          <span class="text-xs text-gray-600">System Status: Operational</span>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center text-xs text-gray-500 mt-6">
+        <p>© 2024 Bitwave. All rights reserved.</p>
+        <p class="mt-1">
+          <a href="#" class="hover:text-gray-700">Privacy Policy</a> • 
+          <a href="#" class="hover:text-gray-700 ml-1">Terms of Service</a>
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import { useCustomerStore } from '@/stores/customers';
-import { ACTUAL_TASK_COUNT } from '@/data/demoUsers';
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-const router = useRouter();
-const authStore = useAuthStore();
-const customerStore = useCustomerStore();
+const router = useRouter()
+const authStore = useAuthStore()
 
-const handleLogin = (email: string) => {
-  if (authStore.login(email)) {
-    const user = authStore.currentUser;
+// Demo users as per your requirements
+const DEMO_USERS = {
+  'finance@validator1.com': { 
+    role: 'customer', 
+    customerId: 1, 
+    tier: 2,
+    company: 'Validator One LLC',
+    erpSystem: 'Xero',
+    complexity: 'medium',
+    contactName: 'Sarah Johnson'
+  },
+  'accounting@validator2.io': { 
+    role: 'customer', 
+    customerId: 2, 
+    tier: 2,
+    company: 'Crypto Validator Corp',
+    erpSystem: 'QBO',
+    complexity: 'medium',
+    contactName: 'Mike Chen'
+  },
+  'cso@bitwave.io': { 
+    role: 'internal', 
+    name: 'Alex Rivera',
+    permissions: ['view_all', 'edit_all'] 
+  },
+  'cs.manager@bitwave.io': { 
+    role: 'cs_manager', 
+    name: 'Jessica Kim',
+    permissions: ['create_customers', 'upload_csv', 'manage_system'] 
+  }
+}
+
+const loginAsUser = (email) => {
+  const user = DEMO_USERS[email]
+  if (user) {
+    // Set the user in your auth store
+    authStore.setCurrentUser({ ...user, email })
     
-    if (user?.role === 'customer' && user.customerId) {
-      customerStore.selectCustomerById(user.customerId);
-      router.push('/customer');
+    // Navigate based on role
+    if (user.role === 'customer') {
+      router.push('/customer/dashboard')
     } else {
-      router.push('/internal');
+      router.push('/internal')
     }
   }
-};
+}
 </script>
