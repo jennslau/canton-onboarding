@@ -370,32 +370,32 @@ const form = ref({
   bookkeepingResponsibility: 'Internal team - Finance Manager and Accounting Specialist'
 })
 
-// Fixed: Only count actual required fields
+// Fixed: Count exactly 12 required fields
 const totalFields = 12
 const completedFields = computed(() => {
   let count = 0
-  if (form.value.businessUseCase?.trim()) count++
-  if (form.value.legalEntityStructure) count++
-  if (form.value.functionalCurrency) count++
-  if (form.value.timeZone) count++
-  if (form.value.erpExpectation) count++
-  if (form.value.erpSystem) count++
-  if (form.value.pricingSource?.trim()) count++
-  if (form.value.pricingFrequency) count++
-  if (form.value.costBasisMethod) count++
-  if (form.value.hasHistoricActivity) count++
-  if (form.value.preBitwaveProcess?.trim()) count++
-  if (form.value.reportingDeadlines?.trim()) count++
-  if (form.value.bookkeepingResponsibility?.trim()) count++
-  return count
+  if (form.value.businessUseCase?.trim()) count++              // 1
+  if (form.value.legalEntityStructure) count++                 // 2
+  if (form.value.functionalCurrency) count++                   // 3
+  if (form.value.timeZone) count++                            // 4
+  if (form.value.erpExpectation) count++                      // 5
+  if (form.value.erpSystem) count++                           // 6
+  if (form.value.pricingSource?.trim()) count++               // 7
+  if (form.value.pricingFrequency) count++                    // 8
+  if (form.value.costBasisMethod) count++                     // 9
+  if (form.value.hasHistoricActivity) count++                 // 10
+  if (form.value.preBitwaveProcess?.trim()) count++           // 11
+  if (form.value.reportingDeadlines?.trim()) count++          // 12
+  // Removed bookkeepingResponsibility to keep it at exactly 12
+  return Math.min(count, totalFields) // Cap at 12 max
 })
 
 const isFormValid = computed(() => {
+  // Match the same 12 fields we're counting
   const requiredFields = [
     'businessUseCase', 'legalEntityStructure', 'functionalCurrency', 'timeZone',
     'erpExpectation', 'erpSystem', 'pricingSource', 'pricingFrequency',
-    'costBasisMethod', 'hasHistoricActivity', 'preBitwaveProcess',
-    'reportingDeadlines', 'bookkeepingResponsibility'
+    'costBasisMethod', 'hasHistoricActivity', 'preBitwaveProcess', 'reportingDeadlines'
   ]
   
   return requiredFields.every(field => {
