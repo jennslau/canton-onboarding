@@ -1,5 +1,8 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+  <div 
+    class="min-h-screen"
+    style="background: linear-gradient(135deg, #f9fafb 0%, #dbeafe 100%);"
+  >
     <!-- Header -->
     <div class="bg-white border-b border-gray-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 py-4">
@@ -25,9 +28,12 @@
 
     <div class="max-w-7xl mx-auto px-4 py-8">
       <!-- Step 1 Header -->
-      <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white mb-8">
-        <h2 class="text-3xl font-bold mb-4">Step 1: Complete Setup Information</h2>
-        <p class="text-blue-100 text-lg">
+      <div 
+        class="rounded-2xl p-8 text-white mb-8"
+        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);"
+      >
+        <h2 class="text-3xl font-bold mb-4" style="color: white;">Step 1: Complete Setup Information</h2>
+        <p class="text-lg" style="color: #ddd6fe;">
           Fill out the Configuration & Setup form and Wallets & Accounts form to continue your onboarding.
         </p>
       </div>
