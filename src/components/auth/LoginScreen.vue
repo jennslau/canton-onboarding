@@ -78,55 +78,20 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
-const authStore = useAuthStore()
-
-// Demo users as per your requirements
-const DEMO_USERS = {
-  'finance@validator1.com': { 
-    role: 'customer', 
-    customerId: 1, 
-    tier: 2,
-    company: 'Validator One LLC',
-    erpSystem: 'Xero',
-    complexity: 'medium',
-    contactName: 'Sarah Johnson'
-  },
-  'accounting@validator2.io': { 
-    role: 'customer', 
-    customerId: 2, 
-    tier: 2,
-    company: 'Crypto Validator Corp',
-    erpSystem: 'QBO',
-    complexity: 'medium',
-    contactName: 'Mike Chen'
-  },
-  'cso@bitwave.io': { 
-    role: 'internal', 
-    name: 'Alex Rivera',
-    permissions: ['view_all', 'edit_all'] 
-  },
-  'cs.manager@bitwave.io': { 
-    role: 'cs_manager', 
-    name: 'Jessica Kim',
-    permissions: ['create_customers', 'upload_csv', 'manage_system'] 
-  }
-}
 
 const loginAsUser = (email) => {
-  const user = DEMO_USERS[email]
-  if (user) {
-    // Set the user in your auth store
-    authStore.setCurrentUser({ ...user, email })
-    
-    // Navigate based on role
-    if (user.role === 'customer') {
-      router.push('/customer/dashboard')
-    } else {
-      router.push('/internal')
-    }
+  // Simple login - just store user email and navigate
+  // This matches your existing login logic
+  localStorage.setItem('currentUser', email)
+  
+  if (email.includes('validator1.com') || email.includes('validator2.io')) {
+    // Customer users
+    router.push('/customer/dashboard')
+  } else {
+    // Internal users
+    router.push('/internal')
   }
 }
 </script>
