@@ -1,87 +1,73 @@
 <template>
-  <!-- BIG RED TEST BANNER -->
-  <div style="background: red; color: white; padding: 30px; font-size: 40px; text-align: center;">
-    🚨 SUCCESS! CustomerDashboard.vue is updating! 🚨
-  </div>
-
-  <!-- GRADIENT TEST -->
-  <div style="min-height: 100vh; background: linear-gradient(135deg, #f9fafb 0%, #dbeafe 100%); padding: 20px;">
-    
-    <!-- Header with gradient -->
-    <div style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1d4ed8 100%); padding: 40px; border-radius: 16px; color: white; text-align: center; margin: 20px 0;">
-      <h1 style="font-size: 32px; font-weight: bold; margin: 0;">Welcome back, Sarah Johnson!</h1>
-      <p style="margin: 10px 0; font-size: 18px;">You are in Week 3 of your 8-week onboarding journey with Canton.</p>
-      
-      <!-- Progress bar -->
-      <div style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 16px; margin-top: 20px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-          <span style="font-weight: bold;">Overall Progress</span>
-          <span style="font-weight: bold;">32%</span>
-        </div>
-        <div style="background: rgba(255, 255, 255, 0.3); border-radius: 20px; height: 12px;">
-          <div style="background: white; border-radius: 20px; height: 12px; width: 32%; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+  <div class="gradient-bg">
+    <!-- Header -->
+    <div class="bg-white border-b border-gray-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+              <span class="text-white font-bold text-lg">C</span>
+            </div>
+            <div>
+              <h1 class="text-xl font-bold text-gray-900">Canton Onboarding</h1>
+              <p class="text-sm text-gray-600">by Bitwave - 166 Tasks System</p>
+            </div>
+          </div>
+          
+          <button 
+            @click="handleLogout"
+            class="text-gray-600 hover:text-gray-800"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>
-
-    <!-- White content card -->
-    <div style="background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 20px 0;">
-      <h2 style="color: #1f2937; margin-bottom: 20px;">🎯 Gradient Test Results</h2>
-      
-      <div style="margin: 20px 0;">
-        <p><strong>Can you see:</strong></p>
-        <ul style="margin: 10px 0; padding-left: 20px;">
-          <li>✅ Red test banner at the top?</li>
-          <li>🌈 Light blue gradient page background?</li>
-          <li>💜 Purple/blue gradient header above?</li>
-          <li>⚪ White progress bar with glassmorphism effect?</li>
-        </ul>
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <!-- Welcome Header -->
+      <div class="gradient-header">
+        <h2 class="text-3xl font-bold mb-2">Welcome back, Sarah Johnson!</h2>
+        <p class="text-lg mb-6" style="color: #ddd6fe;">
+          You are in Week 3 of your 8-week onboarding journey with Canton.
+        </p>
+        <div class="progress-container">
+          <div class="flex justify-between text-sm mb-2">
+            <span class="font-semibold">Overall Progress</span>
+            <span class="font-bold">32%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
+          </div>
+        </div>
       </div>
-
-      <!-- Gradient buttons -->
-      <div style="margin: 20px 0;">
-        <button 
-          @click="goToStep1"
-          style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); color: white; padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-right: 10px; font-size: 16px;"
-        >
-          Continue to Step 1 →
-        </button>
+      <!-- Step Card -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Your Onboarding Journey</h3>
         
-        <button 
-          @click="handleLogout"
-          style="background: #6b7280; color: white; padding: 15px 30px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 16px;"
-        >
-          Logout
-        </button>
+        <div class="p-4 border border-blue-200 bg-blue-50 rounded-xl">
+          <div class="font-semibold text-gray-900">Step 1: Complete Setup Information</div>
+          <div class="text-sm text-gray-500 mb-4">Provide business details and wallet information</div>
+          <button 
+            @click="goToStep1"
+            class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 font-semibold"
+          >
+            Continue Now →
+          </button>
+        </div>
       </div>
-    </div>
-
-    <!-- Test squares -->
-    <div style="background: white; padding: 20px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center;">
-      <h3>Color Test Squares:</h3>
-      <div style="margin: 20px 0;">
-        <div style="background: red; width: 80px; height: 80px; border-radius: 10px; margin: 10px; display: inline-block;"></div>
-        <div style="background: blue; width: 80px; height: 80px; border-radius: 10px; margin: 10px; display: inline-block;"></div>
-        <div style="background: green; width: 80px; height: 80px; border-radius: 10px; margin: 10px; display: inline-block;"></div>
-        <div style="background: linear-gradient(to right, #ff0000, #0000ff); width: 80px; height: 80px; border-radius: 10px; margin: 10px; display: inline-block;"></div>
-      </div>
-      <p>Red, Blue, Green, and Red-to-Blue gradient squares</p>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-
 const router = useRouter()
 const authStore = useAuthStore()
-
 const handleLogout = () => {
   authStore.logout()
   router.push('/login')
 }
-
 const goToStep1 = () => {
   router.push('/customer/step1')
 }
