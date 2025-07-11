@@ -23,7 +23,7 @@
         <div 
           class="h-2 rounded-full transition-all duration-300"
           style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);"
-          :style="{ width: `${(completedFields / totalFields) * 100}%` }"
+          :style="{ width: `${Math.min((completedFields / totalFields) * 100, 100)}%` }"
         ></div>
       </div>
     </div>
@@ -184,32 +184,30 @@
               <label class="block text-sm font-semibold text-gray-900 mb-2">
                 What is your source for "pricing" assets? *
               </label>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Pricing Source</label>
-                  <input
-                    type="text"
-                    v-model="form.pricingSource"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                    placeholder="e.g., CoinGecko, CoinMarketCap"
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Frequency</label>
-                  <select 
-                    v-model="form.pricingFrequency"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                    required
-                  >
-                    <option value="">Select frequency</option>
-                    <option value="Real-time">Real-time</option>
-                    <option value="Daily">Daily</option>
-                    <option value="Weekly">Weekly</option>
-                    <option value="Monthly">Monthly</option>
-                  </select>
-                </div>
-              </div>
+              <input
+                type="text"
+                v-model="form.pricingSource"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                placeholder="e.g., CoinGecko, CoinMarketCap"
+                required
+              />
+            </div>
+            
+            <div>
+              <label class="block text-sm font-semibold text-gray-900 mb-2">
+                Pricing frequency *
+              </label>
+              <select 
+                v-model="form.pricingFrequency"
+                class="w-full p-4 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                required
+              >
+                <option value="">Select frequency</option>
+                <option value="Real-time">Real-time</option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
             </div>
             
             <div>
@@ -245,42 +243,29 @@
               <label class="block text-sm font-semibold text-gray-900 mb-2">
                 Do you have historic activity that needs to be processed? *
               </label>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Historic Activity</label>
-                  <div class="flex space-x-4">
-                    <label class="flex items-center">
-                      <input
-                        type="radio"
-                        name="hasHistoricActivity"
-                        value="Yes"
-                        v-model="form.hasHistoricActivity"
-                        class="mr-2 text-blue-600"
-                        required
-                      />
-                      Yes
-                    </label>
-                    <label class="flex items-center">
-                      <input
-                        type="radio"
-                        name="hasHistoricActivity"
-                        value="No"
-                        v-model="form.hasHistoricActivity"
-                        class="mr-2 text-blue-600"
-                        required
-                      />
-                      No
-                    </label>
-                  </div>
-                </div>
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Bitwave System Record Date</label>
+              <div class="flex space-x-4">
+                <label class="flex items-center">
                   <input
-                    type="date"
-                    v-model="form.bitwaveSystemDate"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                    type="radio"
+                    name="hasHistoricActivity"
+                    value="Yes"
+                    v-model="form.hasHistoricActivity"
+                    class="mr-2 text-blue-600"
+                    required
                   />
-                </div>
+                  Yes
+                </label>
+                <label class="flex items-center">
+                  <input
+                    type="radio"
+                    name="hasHistoricActivity"
+                    value="No"
+                    v-model="form.hasHistoricActivity"
+                    class="mr-2 text-blue-600"
+                    required
+                  />
+                  No
+                </label>
               </div>
             </div>
             
@@ -326,38 +311,12 @@
               <label class="block text-sm font-semibold text-gray-900 mb-2">
                 Who will be performing the digital asset bookkeeping? *
               </label>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Internal Team/Responsibility</label>
-                  <textarea 
-                    v-model="form.bookkeepingResponsibility"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                    rows="2"
-                    placeholder="Internal team members and roles..."
-                    required
-                  />
-                </div>
-                <div>
-                  <label class="block text-xs font-medium text-gray-600 mb-1">Outsourced Accounting Firm</label>
-                  <input
-                    type="text"
-                    v-model="form.outsourcedFirm"
-                    class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                    placeholder="Firm name (if applicable)"
-                  />
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <label class="block text-sm font-semibold text-gray-900 mb-2">
-                Any other unique requirements not previously identified?
-              </label>
               <textarea 
-                v-model="form.otherRequirements"
+                v-model="form.bookkeepingResponsibility"
                 class="w-full p-4 border border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
-                rows="3"
-                placeholder="Any special requirements, compliance needs, or other considerations..."
+                rows="2"
+                placeholder="Internal team members and roles..."
+                required
               />
             </div>
           </div>
@@ -406,30 +365,28 @@ const form = ref({
   pricingFrequency: 'Daily',
   costBasisMethod: 'FIFO',
   hasHistoricActivity: 'No',
-  bitwaveSystemDate: '',
   preBitwaveProcess: 'Manual spreadsheet tracking with monthly reconciliation',
   reportingDeadlines: 'Monthly close by 15th, Quarterly reports by end of following month',
-  bookkeepingResponsibility: 'Internal team - Finance Manager and Accounting Specialist',
-  outsourcedFirm: '',
-  otherRequirements: ''
+  bookkeepingResponsibility: 'Internal team - Finance Manager and Accounting Specialist'
 })
 
+// Fixed: Only count actual required fields
 const totalFields = 12
 const completedFields = computed(() => {
   let count = 0
-  if (form.value.businessUseCase) count++
+  if (form.value.businessUseCase?.trim()) count++
   if (form.value.legalEntityStructure) count++
   if (form.value.functionalCurrency) count++
   if (form.value.timeZone) count++
   if (form.value.erpExpectation) count++
   if (form.value.erpSystem) count++
-  if (form.value.pricingSource) count++
+  if (form.value.pricingSource?.trim()) count++
   if (form.value.pricingFrequency) count++
   if (form.value.costBasisMethod) count++
   if (form.value.hasHistoricActivity) count++
-  if (form.value.preBitwaveProcess) count++
-  if (form.value.reportingDeadlines) count++
-  if (form.value.bookkeepingResponsibility) count++
+  if (form.value.preBitwaveProcess?.trim()) count++
+  if (form.value.reportingDeadlines?.trim()) count++
+  if (form.value.bookkeepingResponsibility?.trim()) count++
   return count
 })
 
@@ -441,7 +398,10 @@ const isFormValid = computed(() => {
     'reportingDeadlines', 'bookkeepingResponsibility'
   ]
   
-  return requiredFields.every(field => form.value[field] && form.value[field].trim() !== '')
+  return requiredFields.every(field => {
+    const value = form.value[field]
+    return value && value.toString().trim() !== ''
+  })
 })
 
 const saveDraft = () => {
