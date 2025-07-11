@@ -1,8 +1,5 @@
 <template>
-  <div 
-    class="min-h-screen"
-    style="background: linear-gradient(135deg, #f9fafb 0%, #dbeafe 100%);"
-  >
+  <div class="gradient-bg">
     <!-- Header -->
     <div class="bg-white border-b border-gray-200 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 py-4">
@@ -29,42 +26,24 @@
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 py-8">
-<!-- Welcome Header with Inline Styles -->
-      <div 
-        class="rounded-2xl p-8 text-white mb-8 relative overflow-hidden"
-        style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 50%, #1d4ed8 100%); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);"
-      >
-        <div 
-          class="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10"
-          style="background: white; transform: translate(8rem, -8rem);"
-        ></div>
-        <div class="relative">
-          <h2 class="text-3xl font-bold mb-2" style="color: white;">Welcome back, Sarah Johnson!</h2>
-          <p class="text-lg mb-6" style="color: #ddd6fe;">
-            You are in Week 3 of your 8-week onboarding journey with Canton.
-          </p>
-          <div 
-            class="rounded-xl p-4"
-            style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);"
-          >
-            <div class="flex justify-between text-sm mb-2">
-              <span class="font-semibold" style="color: white;">Overall Progress</span>
-              <span class="font-bold" style="color: white;">32%</span>
-            </div>
-            <div 
-              class="w-full rounded-full h-3"
-              style="background: rgba(255, 255, 255, 0.3);"
-            >
-              <div 
-                class="rounded-full h-3 transition-all duration-500"
-                style="width: 32%; background: white; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);"
-              ></div>
-            </div>
+      <!-- Welcome Header -->
+      <div class="gradient-header">
+        <h2 class="text-3xl font-bold mb-2">Welcome back, Sarah Johnson!</h2>
+        <p class="text-lg mb-6" style="color: #ddd6fe;">
+          You are in Week 3 of your 8-week onboarding journey with Canton.
+        </p>
+        <div class="progress-container">
+          <div class="flex justify-between text-sm mb-2">
+            <span class="font-semibold">Overall Progress</span>
+            <span class="font-bold">32%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill"></div>
           </div>
         </div>
       </div>
 
-      <!-- Simple Step Card -->
+      <!-- Step Card -->
       <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
         <h3 class="text-xl font-bold text-gray-900 mb-6">Your Onboarding Journey</h3>
         
