@@ -15,7 +15,7 @@
           </div>
           <button 
             @click="goBack"
-            class="text-blue-600 hover:text-blue-800 font-semibold flex items-center transition-colors"
+            class="text-blue-600 hover:text-blue-800 font-semibold"
           >
             ← Back to Dashboard
           </button>
@@ -32,92 +32,76 @@
         </p>
       </div>
 
-      <!-- Form Tabs -->
-      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 mb-8">
-        <div class="border-b border-gray-200">
-          <nav class="flex space-x-8 px-8 py-4">
-            <button 
-              @click="setCurrentSubView('configuration')"
-              :class="[
-                'py-3 px-1 border-b-3 font-semibold text-lg flex items-center transition-colors',
-                currentSubView === 'configuration' 
-                  ? 'border-blue-600 text-blue-600' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              ]"
-            >
-              Configuration & Setup
-              <CheckCircle v-if="completedForms.configuration" class="ml-2 w-5 h-5 text-green-500" />
-            </button>
-            <button 
-              @click="setCurrentSubView('wallets')"
-              :class="[
-                'py-3 px-1 border-b-3 font-semibold text-lg flex items-center transition-colors',
-                currentSubView === 'wallets' 
-                  ? 'border-blue-600 text-blue-600' 
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
-              ]"
-            >
-              Wallets & Accounts
-              <CheckCircle v-if="completedForms.wallets" class="ml-2 w-5 h-5 text-green-500" />
-            </button>
-          </nav>
-        </div>
+      <!-- Simple Forms Demo -->
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Demo Forms</h3>
         
-        <div class="p-8">
-          <ConfigurationForm
-            v-if="currentSubView === 'configuration'"
-            @complete="handleFormComplete"
-          />
-          
-          <WalletsForm
-            v-if="currentSubView === 'wallets'"
-            @complete="handleFormComplete"
-          />
-        </div>
-      </div>
+        <div class="space-y-6">
+          <!-- Configuration Demo -->
+          <div class="p-6 border border-gray-200 rounded-xl">
+            <h4 class="text-lg font-semibold text-blue-600 mb-4">Configuration & Setup</h4>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-900 mb-2">
+                  How does your organization use digital assets?
+                </label>
+                <textarea 
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  rows="3"
+                  placeholder="Ethereum validator operations and staking rewards management"
+                ></textarea>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-semibold text-gray-900 mb-2">
+                  ERP System
+                </label>
+                <select class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200">
+                  <option>Xero</option>
+                  <option>QuickBooks Online</option>
+                  <option>NetSuite</option>
+                  <option>Sage Intacct</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
-      <!-- Completion Status -->
-      <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 max-w-4xl mx-auto">
-        <h3 class="text-xl font-bold text-gray-900 mb-4">Step 1 Completion Status</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div :class="[
-            'p-4 rounded-xl border-2 transition-colors',
-            completedForms.configuration ? 'border-green-500 bg-green-50' : 'border-gray-300 bg-gray-50'
-          ]">
-            <div class="flex items-center">
-              <CheckCircle v-if="completedForms.configuration" class="w-6 h-6 text-green-500 mr-3" />
-              <Circle v-else class="w-6 h-6 text-gray-400 mr-3" />
-              <span :class="[
-                'font-semibold',
-                completedForms.configuration ? 'text-green-700' : 'text-gray-600'
-              ]">
-                Configuration & Setup
-              </span>
+          <!-- Wallets Demo -->
+          <div class="p-6 border border-gray-200 rounded-xl">
+            <h4 class="text-lg font-semibold text-purple-600 mb-4">Wallets & Accounts</h4>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-semibold text-gray-900 mb-2">
+                  Wallet Name
+                </label>
+                <input 
+                  type="text" 
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  placeholder="Primary Validator Wallet"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-semibold text-gray-900 mb-2">
+                  Blockchain Network
+                </label>
+                <input 
+                  type="text" 
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                  placeholder="Ethereum"
+                />
+              </div>
             </div>
           </div>
-          <div :class="[
-            'p-4 rounded-xl border-2 transition-colors',
-            completedForms.wallets ? 'border-green-500 bg-green-50' : 'border-gray-300 bg-gray-50'
-          ]">
-            <div class="flex items-center">
-              <CheckCircle v-if="completedForms.wallets" class="w-6 h-6 text-green-500 mr-3" />
-              <Circle v-else class="w-6 h-6 text-gray-400 mr-3" />
-              <span :class="[
-                'font-semibold',
-                completedForms.wallets ? 'text-green-700' : 'text-gray-600'
-              ]">
-                Wallets & Accounts
-              </span>
-            </div>
-          </div>
-        </div>
-        
-        <div
-          v-if="isStep1Complete"
-          class="mt-4 p-4 bg-green-50 border border-green-200 rounded-xl"
-        >
-          <div class="text-green-700 font-semibold text-center">
-            🎉 Step 1 Complete! Ready to proceed to Step 2: Connect Your Systems
+
+          <!-- Demo Complete Button -->
+          <div class="text-center">
+            <button 
+              @click="completeStep1"
+              class="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-xl hover:from-green-700 hover:to-emerald-700 font-semibold text-lg"
+            >
+              Complete Step 1 Demo ✅
+            </button>
           </div>
         </div>
       </div>
@@ -126,40 +110,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { CheckCircle, Circle } from 'lucide-vue-next';
-import { useFormStore } from '@/stores/forms';
-import ConfigurationForm from './ConfigurationForm.vue';
-import WalletsForm from './WalletsForm.vue';
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const formStore = useFormStore();
-
-const currentSubView = computed(() => formStore.currentSubView);
-const completedForms = computed(() => formStore.completedForms);
-const isStep1Complete = computed(() => formStore.isStep1Complete());
-
-const setCurrentSubView = formStore.setCurrentSubView;
+const router = useRouter()
 
 const goBack = () => {
-  router.push('/customer');
-};
+  router.push('/customer')
+}
 
-const handleFormComplete = (formType: 'configuration' | 'wallets') => {
-  formStore.completeForm(formType);
-  
-  if (formType === 'wallets' && completedForms.value.configuration) {
-    setTimeout(() => {
-      alert('Customer Step 1 completed! 🎉 Moving to Step 2: Connect Your Systems');
-      router.push('/customer');
-    }, 500);
-  }
-  if (formType === 'configuration' && completedForms.value.wallets) {
-    setTimeout(() => {
-      alert('Customer Step 1 completed! 🎉 Moving to Step 2: Connect Your Systems');
-      router.push('/customer');
-    }, 500);
-  }
-};
+const completeStep1 = () => {
+  alert('🎉 Step 1 Complete! This would normally advance to Step 2.')
+  router.push('/customer')
+}
 </script>
